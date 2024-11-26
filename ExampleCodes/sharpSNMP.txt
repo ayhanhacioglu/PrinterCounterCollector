@@ -1,0 +1,162 @@
+
+https://www.codeproject.com/Articles/468892/An-introduction-to-sharpSNMP-an-Open-Source-SNMP-i
+
+An introduction to #SNMP, an Open Source SNMP implementation
+
+This article introduces #SNMP and how to use it to accomplish SNMP operations such as managing SNMP enabled devices.
+
+Introduction
+#SNMP (SharpSNMP) Suite is a set of free SNMP tools based on an Open Source library for developers who target Microsoft .NET/Xamarin Mono platforms. It's developed in C# and can be used for VB.NET, Delphi Prism, and many other programming languages.
+
+This article is released under MIT license (so the sample code shown in this article is also released under MIT license). 
+
+Background 
+TCP/IP based socket programming is fully supported by .NET Framework since its day 1. However, as there is no class in .NET Framework Base Class Library that is specific for SNMP, developers have to resort to very expensive third party libraries. There were a few free solutions, but they either lacks of SNMP v3, MIB support, or other advanced features. I wrote a blog post back in 2007 which listed more information if you want to investigate.
+
+In April 2008 I announced an open source project called #SNMP to address this problem, as I believe that via collaboration a better solution can be achieved to benefit whoever wants a good enough free solution. After more than 4 years, this library grows to its current status, with a strong enough library, plus many useful sample projects.
+
+The project homepage is at CodePlex, and the source code is at GitHub. Note that the code base is split into different modules, and released under different licenses, as stated in KB600012. 
+
+Primarily #SNMP can be used on Windows/.NET platforms, such as Windows XP/Windows Vista/Windows 7 and Windows Server OS, supporting .NET Framework 3.5/4.0/4.5. As a pure .NET based code base, it has been successfully ported to Windows CE/.NET CF, Mono, MonoTouch, as well as Mono for Android.
+Using the library
+The documentation package contains a SandCastle generated help file, which can be used to glance on all classes provided in #SNMP Library (Lextm.SharpSnmpLib.*.dll).
+
+Below a few SNMP operations (GET, SET and so on) are translated to #SNMP function calls,
+
+GET Operation
+The following code shows how to send an SNMP v1 GET message to an SNMP agent located at 192.168.1.2 and query on OID 1.3.6.1.2.1.1.1.0,
+var result = Messenger.Get(VersionCode.V1, 
+                           new IPEndPoint(IPAddress.Parse("192.168.1.2"), 161), 
+                           new OctetString("public"),
+                           new List<Variable>{new Variable(new ObjectIdentifier("1.3.6.1.2.1.1.1.0"))},
+                           60000);
+
+This operation will time out if no reply is received after 60 seconds (1 minute), and throw an exception (TimeoutException). If any error occurs, an ErrorException can be caught. All #SNMP exceptions are derived from SnmpException. 
+
+The result returned is a list that matches the list of Variable objects sent. The Variable in this list contains the value of the OID.
+
+SET Operation
+The following code shows how to send an SNMP v1 SET message to an SNMP agent located at 192.168.1.2 and set the value of OID 1.3.6.1.2.1.1.6.0 to "Shanghai",
+var result = Messenger.Set(VersionCode.V1, 
+                           new IPEndPoint(IPAddress.Parse("192.168.1.2"), 161), 
+                           new OctetString("public"),
+                           new List<Variable>{new Variable(new ObjectIdentifier("1.3.6.1.2.1.1.6.0"), new OctetString("Shanghai"))},
+                           60000);
+						   
+GET-NEXT Operation
+The following code shows how to send an SNMP v1 GET-NEXT message to an SNMP agent located at 192.168.1.2 and query on OID 1.3.6.1.2.1.1.1.0,
+GetNextRequestMessage message = new GetNextRequestMessage(0,
+                              VersionCode.V1,
+                              new OctetString("public"),
+                              new List<Variable>{new Variable(new ObjectIdentifier("1.3.6.1.2.1.1.6.0"))});
+ISnmpMessage response = message.GetResponse(60000, new IPEndPoint(IPAddress.Parse("192.168.1.2"), 161));
+if (response.Pdu().ErrorStatus.ToInt32() != 0) 
+{
+    throw ErrorException.Create(
+        "error in response",
+        receiver.Address,
+        response);
+}
+
+var result = response.Pdu().Variables;
+
+GET-BULK Operation
+The following code shows how to send an SNMP v2 GET-BULK message to an SNMP agent located at 192.168.1.2 and query on OID 1.3.6.1.2.1.1.1.0,
+GetBulkRequestMessage message = new GetBulkRequestMessage(0,
+                      VersionCode.V2,
+                      new OctetString("public"),
+                      0,
+                      10,
+                      new List<Variable>{new Variable(new ObjectIdentifier("1.3.6.1.2.1.1.6.0"))});
+ISnmpMessage response = message.GetResponse(60000, new IPEndPoint(IPAddress.Parse("192.168.1.2"), 161));
+if (response.Pdu().ErrorStatus.ToInt32() != 0)
+{
+    throw ErrorException.Create(
+        "error in response",
+        receiver.Address,
+        response);
+}
+
+var result = response.Pdu().Variables;
+
+Walk Operation
+Walk is not an atomic operation. That means, it utilizes several GET-NEXT (SNMP v1 walk) or GET-BULK (v2 and above). The following code shows how to perform walk on an SNMP agent located at 192.168.1.2 starting at 1.3.6.1.2.1.1,
+var result = new List<Variable>();
+Messenger.Walk(VersionCode.V1, 
+               new IPEndPoint(IPAddress.Parse("192.168.1.2"), 161), 
+               new OctetString("public"), 
+               new ObjectIdentifier("1.3.6.1.2.1.1"), 
+               result, 
+               60000, 
+               WalkMode.WithinSubtree);
+
+The result returned contains a list of all available OIDs (as Variable) in this SNMP agent that under tree node of 1.3.6.1.2.1.1.
+
+#SNMP supports two walk modes, Default and WithinSubtree.
+
+Messenger.Walk is built GET-NEXT. Note that Messenger.BulkWalk should be used if the device supports SNMP v2, as it is built on GET-BULK and provide better performance.
+
+var result = new List<Variable>();
+Messenger.BulkWalk(VersionCode.V2, 
+                   new IPEndPoint(IPAddress.Parse("192.168.1.2"), 161), 
+                   new OctetString("public"), 
+                   new ObjectIdentifier("1.3.6.1.2.1.1"), 
+                   result, 
+                   60000, 
+                   10, 
+                   WalkMode.WithinSubtree, 
+                   null, 
+                   null);
+
+TRAP Operation
+It is usually an SNMP agent that sends out TRAP messages. The following code shows how to send an empty SNMP v1 TRAP message from 192.168.1.2 to an SNMP manager located at 192.168.1.3,
+Messenger.SendTrapV1(new IPEndPoint(IPAddress.Parse("192.168.1.3"), 162), 
+                     IPAddress.Parse("192.168.1.2"), 
+                     new OctetString("public"), 
+                     new ObjectIdentifier("1.3.6.1.2.1.1"), 
+                     GenericCode.ColdStart, 
+                     0, 
+                     0, 
+                     new List<Variable>();
+SNMP v2 and above introduces a simplified TRAP v2 message,
+Messenger.SendTrapV2(0, 
+                     VersionCode.V2, 
+                     new IPEndPoint(IPAddress.Parse("192.168.1.3"), 162), 
+                     new OctetString("public"), 
+                     new ObjectIdentifier("1.3.6.1.2.1.1"), 
+                     0, 
+                     new List<Variable>());
+
+INFORM Operation
+It is usually an SNMP agent that sends out INFORM messages. The following code shows how to send an empty INFORM message to an SNMP manager located at 192.168.1.3,
+Messenger.SendInform(0, 
+                     VersionCode.V2, 
+                     new IPEndPoint(IPAddress.Parse("192.168.1.3"), 162), 
+                     new OctetString("public"), 
+                     new ObjectIdentifier("1.3.6.1.2.1.1"), 
+                     0, 
+                     new List<Variable>(), 
+                     2000, 
+                     null, 
+                     null);
+
+The manager should send back a reply to this INFORM message. Otherwise, a TimeoutException occurs.
+
+To help you understand how to use the API provided by #SNMP Library, there are more sample projects you can find under Samples folder in source code package. Both C# and VB.NET samples are available.
+
+Points of Interest
+The above samples should give you a taste on how simple it is to perform common SNMP operations with #SNMP API.
+
+I am going to write more articles on advanced usage such as compiling MIB document, SNMP v3 operations, and big samples such as #SNMP Compiler/Browser/Agent.
+
+History
+June 9th, 2013: Upgraded binaries to 8.0 release. 
+
+October 3rd, 2012: Added more operations and sample code.
+
+October 2nd, 2012: Revised open source license descriptions.
+
+September 30th, 2012: Initial release of this article.
+
+License
+This article, along with any associated source code and files, is licensed under The MIT License					 

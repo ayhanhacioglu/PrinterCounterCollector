@@ -1,0 +1,25 @@
+USE [PrinterCounterCollector]
+GO
+
+/****** Object:  Table [dbo].[DeviceVendor]    Script Date: 18.11.2024 00:11:47 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[DeviceVendor](
+	[DVDeviceVendorId] [int] IDENTITY(1,1) NOT NULL,
+	[DVVendor] [nvarchar](250) NULL,
+	[DVComment] [nvarchar](250) NULL,
+	[DVIsActive] [bit] NULL,
+	[DVIsDeleted] [bit] NULL,
+	[DVRecordDateTime] [datetime] NULL,
+ CONSTRAINT [PK_DeviceVendor] PRIMARY KEY CLUSTERED 
+(
+	[DVDeviceVendorId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+

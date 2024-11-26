@@ -1,0 +1,25 @@
+USE [PrinterCounterCollector]
+GO
+
+/****** Object:  Table [dbo].[DeviceModel]    Script Date: 18.11.2024 00:10:47 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[DeviceModel](
+	[DMDeviceModelId] [int] IDENTITY(1,1) NOT NULL,
+	[DMModel] [nvarchar](250) NULL,
+	[DMComment] [nvarchar](250) NULL,
+	[DMIsActive] [bit] NULL,
+	[DMIsDeleted] [bit] NULL,
+	[DMRecordDateTime] [datetime] NULL,
+ CONSTRAINT [PK_DeviceModel] PRIMARY KEY CLUSTERED 
+(
+	[DMDeviceModelId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+

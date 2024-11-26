@@ -1,0 +1,30 @@
+USE [PrinterCounterCollector]
+GO
+
+/****** Object:  Table [dbo].[CopierRental]    Script Date: 18.11.2024 01:05:59 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[CopierRental](
+	[CRCopierRentalId] [int] IDENTITY(1,1) NOT NULL,
+	[CRAgreementCompanyName] [nvarchar](250) NULL,
+	[CRAgreementStart] [datetime] NULL,
+	[CRAgreementStop] [datetime] NULL,
+	[CRAgreementCurrency] [int] NULL,
+	[CRAgreementColorPrice] [float] NULL,
+	[CRAgreementBWPrice] [float] NULL,
+	[CRComment] [nvarchar](250) NULL,
+	[CRIsActive] [bit] NULL,
+	[CRIsDeleted] [bit] NULL,
+	[CRRecordDateTime] [datetime] NULL,
+ CONSTRAINT [PK_CopierRental] PRIMARY KEY CLUSTERED 
+(
+	[CRCopierRentalId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+

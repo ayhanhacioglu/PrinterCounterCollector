@@ -1,0 +1,25 @@
+USE [PrinterCounterCollector]
+GO
+
+/****** Object:  Table [dbo].[ScanSettings]    Script Date: 18.11.2024 01:04:24 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[ScanSettings](
+	[SSScanSettingsId] [int] IDENTITY(1,1) NOT NULL,
+	[SSOidName] [nvarchar](250) NULL,
+	[SSOid] [nvarchar](250) NULL,
+	[SSIsActive] [bit] NULL,
+	[SSIsDeleted] [bit] NULL,
+	[SSRecordDateTime] [datetime] NULL,
+ CONSTRAINT [PK_ScanSettings] PRIMARY KEY CLUSTERED 
+(
+	[SSScanSettingsId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+

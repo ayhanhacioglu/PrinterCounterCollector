@@ -1,0 +1,25 @@
+CREATE TABLE [dbo].[Inventory](
+	[IInventoryId] [int] IDENTITY(1,1) NOT NULL,
+	[IInventoryStatusId] [int] NULL,
+	[IScanSettingsId] [int] NULL,
+	[ICustomOid] [nvarchar] (250) NULL,
+	[IDeviceName] [nvarchar](250) NULL,
+	[IDeviceLocation] [nvarchar](250) NULL,
+	[IDeviceTypeId] [int] NULL,
+	[IDeviceModelId] [int] NULL,
+	[IDeviceVendorId] [int] NULL,
+	[IComment] [nvarchar](250) NULL,
+	[IRentalStartDate] [DateTime],
+	[IRentalStopDate] [DateTime],
+	[IAgreementRentalPrice] [float],
+	[IScanInterval] [int] NULL,
+	[IScanTimerIsActive] [bit] NULL,
+	[IIsActive] [bit] NULL,
+	[IIsDeleted] [bit] NULL,
+	[IRecordDateTime] [datetime] NULL,
+ CONSTRAINT [PK_Inventory] PRIMARY KEY CLUSTERED 
+(
+	[IInventoryId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
