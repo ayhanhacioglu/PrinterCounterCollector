@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace CounterCollector
 {
-    public partial class InventoryForm : Form
+    public partial class InventoryDetailForm : Form
     {
-        public InventoryForm()
+        public InventoryDetailForm()
         {
             InitializeComponent();
             FormClosing += InventoryForm_FormClosing;
@@ -20,16 +20,18 @@ namespace CounterCollector
 
         private void InventoryForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            MainForm mainForm = new MainForm();
-            mainForm.Visible = true;
+            //MainForm mainForm = new MainForm();
+            //mainForm.Visible = true;
+
+            InventoryListForm ınventoryListForm = new InventoryListForm();
+            ınventoryListForm.Show();
         }
 
-        private void InventoryForm_Load(object sender, EventArgs e)
+        public void InventoryForm_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'printerCounterCollectorInventoryDataSet.SP_InventorySelect' table. You can move, or remove it, as needed.
-            this.sP_InventorySelectTableAdapter.Fill(this.printerCounterCollectorInventoryDataSet.SP_InventorySelect);
             // TODO: This line of code loads data into the 'printerCounterCollectorDataSetInventory.SP_InventorySelect' table. You can move, or remove it, as needed.
-            this.sP_InventorySelectTableAdapter.Fill(this.printerCounterCollectorInventoryDataSet.SP_InventorySelect);
+            //this.sP_InventorySelectTableAdapter.Fill(this.printerCounterCollectorInventoryDataSet.SP_InventorySelect);
+            
             textBox1.Text = printerCounterCollectorInventoryDataSet.SP_InventorySelect.Select(k => k.IInventoryId).LastOrDefault().ToString();
             textBox2.Text = printerCounterCollectorInventoryDataSet.SP_InventorySelect.Select(k => k.IDeviceName).LastOrDefault().ToString();
             textBox4.Text = printerCounterCollectorInventoryDataSet.SP_InventorySelect.Select(k => k.IIPAddress).LastOrDefault().ToString();

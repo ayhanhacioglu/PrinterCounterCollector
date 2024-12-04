@@ -1,7 +1,7 @@
 ﻿
 namespace CounterCollector
 {
-    partial class InventoryForm
+    partial class InventoryDetailForm
     {
         /// <summary>
         /// Required designer variable.
@@ -30,7 +30,7 @@ namespace CounterCollector
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InventoryForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InventoryDetailForm));
             this.inventoryidlbl = new System.Windows.Forms.Label();
             this.inventoryformbtn1 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -41,7 +41,6 @@ namespace CounterCollector
             this.textBox6 = new System.Windows.Forms.TextBox();
             this.printerCounterCollectorInventoryDataSet = new CounterCollector.PrinterCounterCollectorInventoryDataSet();
             this.sPInventorySelectBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.sP_InventorySelectTableAdapter = new CounterCollector.PrinterCounterCollectorInventoryDataSetTableAdapters.SP_InventorySelectTableAdapter();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -68,7 +67,6 @@ namespace CounterCollector
             this.label17 = new System.Windows.Forms.Label();
             this.textBox18 = new System.Windows.Forms.TextBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.sPInventorySelectBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.comboBox4 = new System.Windows.Forms.ComboBox();
@@ -77,7 +75,6 @@ namespace CounterCollector
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.printerCounterCollectorInventoryDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sPInventorySelectBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sPInventorySelectBindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // inventoryidlbl
@@ -165,10 +162,6 @@ namespace CounterCollector
             // 
             this.sPInventorySelectBindingSource.DataMember = "SP_InventorySelect";
             this.sPInventorySelectBindingSource.DataSource = this.printerCounterCollectorInventoryDataSet;
-            // 
-            // sP_InventorySelectTableAdapter
-            // 
-            this.sP_InventorySelectTableAdapter.ClearBeforeFill = true;
             // 
             // label1
             // 
@@ -420,8 +413,6 @@ namespace CounterCollector
             // 
             // comboBox1
             // 
-            this.comboBox1.DataSource = this.sPInventorySelectBindingSource1;
-            this.comboBox1.DisplayMember = "IDeviceLocation";
             this.comboBox1.Enabled = false;
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(349, 47);
@@ -429,15 +420,8 @@ namespace CounterCollector
             this.comboBox1.Size = new System.Drawing.Size(121, 21);
             this.comboBox1.TabIndex = 42;
             // 
-            // sPInventorySelectBindingSource1
-            // 
-            this.sPInventorySelectBindingSource1.DataMember = "SP_InventorySelect";
-            this.sPInventorySelectBindingSource1.DataSource = this.printerCounterCollectorInventoryDataSet;
-            // 
             // comboBox2
             // 
-            this.comboBox2.DataSource = this.sPInventorySelectBindingSource1;
-            this.comboBox2.DisplayMember = "IDeviceLocation";
             this.comboBox2.Enabled = false;
             this.comboBox2.FormattingEnabled = true;
             this.comboBox2.Location = new System.Drawing.Point(117, 71);
@@ -447,8 +431,6 @@ namespace CounterCollector
             // 
             // comboBox3
             // 
-            this.comboBox3.DataSource = this.sPInventorySelectBindingSource1;
-            this.comboBox3.DisplayMember = "IDeviceLocation";
             this.comboBox3.Enabled = false;
             this.comboBox3.FormattingEnabled = true;
             this.comboBox3.Location = new System.Drawing.Point(349, 74);
@@ -458,8 +440,6 @@ namespace CounterCollector
             // 
             // comboBox4
             // 
-            this.comboBox4.DataSource = this.sPInventorySelectBindingSource1;
-            this.comboBox4.DisplayMember = "IDeviceLocation";
             this.comboBox4.Enabled = false;
             this.comboBox4.FormattingEnabled = true;
             this.comboBox4.Location = new System.Drawing.Point(571, 73);
@@ -469,8 +449,6 @@ namespace CounterCollector
             // 
             // comboBox5
             // 
-            this.comboBox5.DataSource = this.sPInventorySelectBindingSource1;
-            this.comboBox5.DisplayMember = "IDeviceLocation";
             this.comboBox5.Enabled = false;
             this.comboBox5.FormattingEnabled = true;
             this.comboBox5.Location = new System.Drawing.Point(592, 11);
@@ -494,7 +472,7 @@ namespace CounterCollector
             this.dateTimePicker2.Size = new System.Drawing.Size(200, 20);
             this.dateTimePicker2.TabIndex = 48;
             // 
-            // InventoryForm
+            // InventoryDetailForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -542,13 +520,12 @@ namespace CounterCollector
             this.HelpButton = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
-            this.Name = "InventoryForm";
+            this.Name = "InventoryDetailForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Inventory Screen";
             this.Load += new System.EventHandler(this.InventoryForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.printerCounterCollectorInventoryDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sPInventorySelectBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sPInventorySelectBindingSource1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -566,7 +543,6 @@ namespace CounterCollector
         private System.Windows.Forms.TextBox textBox6;
         private PrinterCounterCollectorInventoryDataSet printerCounterCollectorInventoryDataSet;
         private System.Windows.Forms.BindingSource sPInventorySelectBindingSource;
-        private PrinterCounterCollectorInventoryDataSetTableAdapters.SP_InventorySelectTableAdapter sP_InventorySelectTableAdapter;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
@@ -593,7 +569,6 @@ namespace CounterCollector
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.TextBox textBox18;
         private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.BindingSource sPInventorySelectBindingSource1;
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.ComboBox comboBox3;
         private System.Windows.Forms.ComboBox comboBox4;

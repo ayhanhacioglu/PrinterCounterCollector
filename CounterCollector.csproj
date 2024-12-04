@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="packages\EntityFramework.6.5.1\build\EntityFramework.props" Condition="Exists('packages\EntityFramework.6.5.1\build\EntityFramework.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -12,6 +13,8 @@
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -38,6 +41,12 @@
     <Reference Include="DevExpress.Sparkline.v19.2.Core, Version=19.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Utils.v19.2, Version=19.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraEditors.v19.2, Version=19.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.5.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.5.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Lextm.SharpSnmpLib.Mib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\Lextm.SharpSnmpLib.MibParser.1.0.1\lib\netstandard1.6\Lextm.SharpSnmpLib.Mib.dll</HintPath>
     </Reference>
@@ -80,16 +89,21 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="InventoryForm.cs">
+    <Compile Include="InventoryDetailForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="InventoryForm.Designer.cs">
-      <DependentUpon>InventoryForm.cs</DependentUpon>
+    <Compile Include="InventoryDetailForm.Designer.cs">
+      <DependentUpon>InventoryDetailForm.cs</DependentUpon>
     </Compile>
     <Compile Include="PrinterCounterCollectorInventoryDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>PrinterCounterCollectorInventoryDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="PrinterCounterCollectorInventoryGetDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PrinterCounterCollectorInventoryGetDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="PrinterCounterCollectorScanSettingsDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -104,8 +118,8 @@
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="InventoryForm.resx">
-      <DependentUpon>InventoryForm.cs</DependentUpon>
+    <EmbeddedResource Include="InventoryDetailForm.resx">
+      <DependentUpon>InventoryDetailForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -127,6 +141,17 @@
     </None>
     <None Include="PrinterCounterCollectorInventoryDataSet.xss">
       <DependentUpon>PrinterCounterCollectorInventoryDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="PrinterCounterCollectorInventoryGetDataSet.xsc">
+      <DependentUpon>PrinterCounterCollectorInventoryGetDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="PrinterCounterCollectorInventoryGetDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>PrinterCounterCollectorInventoryGetDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="PrinterCounterCollectorInventoryGetDataSet.xss">
+      <DependentUpon>PrinterCounterCollectorInventoryGetDataSet.xsd</DependentUpon>
     </None>
     <None Include="PrinterCounterCollectorScanSettingsDataSet.xsc">
       <DependentUpon>PrinterCounterCollectorScanSettingsDataSet.xsd</DependentUpon>
@@ -153,4 +178,12 @@
     <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\EntityFramework.6.5.1\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\EntityFramework.6.5.1\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('packages\EntityFramework.6.5.1\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\EntityFramework.6.5.1\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="packages\EntityFramework.6.5.1\build\EntityFramework.targets" Condition="Exists('packages\EntityFramework.6.5.1\build\EntityFramework.targets')" />
 </Project>

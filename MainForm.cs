@@ -157,7 +157,7 @@ namespace CounterCollector
             //this.Visible = false;
             //inventoryForm.Show();
             
-            InventoryListForm ınventoryListForm= new InventoryListForm();
+            InventoryListForm ınventoryListForm = new InventoryListForm();
             this.Visible = false;
             ınventoryListForm.Show();
 

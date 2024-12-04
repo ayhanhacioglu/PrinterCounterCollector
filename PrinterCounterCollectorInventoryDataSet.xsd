@@ -55,7 +55,7 @@
       </DataSource>
     </xs:appinfo>
   </xs:annotation>
-  <xs:element name="PrinterCounterCollectorInventoryDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_UserDSName="PrinterCounterCollectorInventoryDataSet" msprop:Generator_DataSetName="PrinterCounterCollectorInventoryDataSet">
+  <xs:element name="PrinterCounterCollectorInventoryDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:Generator_UserDSName="PrinterCounterCollectorInventoryDataSet" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="PrinterCounterCollectorInventoryDataSet">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
         <xs:element name="SP_InventorySelect" msprop:Generator_RowEvHandlerName="SP_InventorySelectRowChangeEventHandler" msprop:Generator_RowDeletedName="SP_InventorySelectRowDeleted" msprop:Generator_RowDeletingName="SP_InventorySelectRowDeleting" msprop:Generator_RowEvArgName="SP_InventorySelectRowChangeEvent" msprop:Generator_TablePropName="SP_InventorySelect" msprop:Generator_RowChangedName="SP_InventorySelectRowChanged" msprop:Generator_RowChangingName="SP_InventorySelectRowChanging" msprop:Generator_TableClassName="SP_InventorySelectDataTable" msprop:Generator_RowClassName="SP_InventorySelectRow" msprop:Generator_TableVarName="tableSP_InventorySelect" msprop:Generator_UserTableName="SP_InventorySelect">

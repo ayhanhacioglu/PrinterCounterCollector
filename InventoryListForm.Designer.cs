@@ -63,13 +63,19 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sPInventorySelectBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.printerCounterCollectorInventoryDataSet)).BeginInit();
+            this.printerCounterCollectorInventoryGetDataSet = new CounterCollector.PrinterCounterCollectorInventoryGetDataSet();
+            this.sP_InventoryGetTableAdapter = new PrinterCounterCollectorInventoryGetDataSetTableAdapters.SP_InventoryGetTableAdapter();
+
             this.SuspendLayout();
             // 
             // dataGridView1
             // 
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
+            this.dataGridView1.AllowUserToResizeColumns = false;
+            this.dataGridView1.AllowUserToResizeRows = false;
             this.dataGridView1.AutoGenerateColumns = false;
+            this.dataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Sunken;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ıInventoryIdDataGridViewTextBoxColumn,
@@ -99,47 +105,69 @@
             this.cRIsDeletedDataGridViewCheckBoxColumn,
             this.cRRecordDateTimeDataGridViewTextBoxColumn});
             this.dataGridView1.DataSource = this.sPInventorySelectBindingSource;
+            this.dataGridView1.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+            this.dataGridView1.EnableHeadersVisualStyles = false;
             this.dataGridView1.Location = new System.Drawing.Point(12, 12);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(776, 110);
+            this.dataGridView1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.dataGridView1.RowHeadersVisible = false;
+            this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridView1.ShowCellErrors = false;
+            this.dataGridView1.ShowCellToolTips = false;
+            this.dataGridView1.ShowEditingIcon = false;
+            this.dataGridView1.ShowRowErrors = false;
+            this.dataGridView1.Size = new System.Drawing.Size(776, 426);
             this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             // 
             // ıInventoryIdDataGridViewTextBoxColumn
             // 
+            this.ıInventoryIdDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.ıInventoryIdDataGridViewTextBoxColumn.DataPropertyName = "IInventoryId";
-            this.ıInventoryIdDataGridViewTextBoxColumn.HeaderText = "IInventoryId";
+            this.ıInventoryIdDataGridViewTextBoxColumn.HeaderText = "Device ID";
             this.ıInventoryIdDataGridViewTextBoxColumn.Name = "ıInventoryIdDataGridViewTextBoxColumn";
             this.ıInventoryIdDataGridViewTextBoxColumn.ReadOnly = true;
+            this.ıInventoryIdDataGridViewTextBoxColumn.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.ıInventoryIdDataGridViewTextBoxColumn.Width = 74;
             // 
             // ıDeviceLocationDataGridViewTextBoxColumn
             // 
+            this.ıDeviceLocationDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.ıDeviceLocationDataGridViewTextBoxColumn.DataPropertyName = "IDeviceLocation";
-            this.ıDeviceLocationDataGridViewTextBoxColumn.HeaderText = "IDeviceLocation";
+            this.ıDeviceLocationDataGridViewTextBoxColumn.HeaderText = "Device Location";
             this.ıDeviceLocationDataGridViewTextBoxColumn.Name = "ıDeviceLocationDataGridViewTextBoxColumn";
             this.ıDeviceLocationDataGridViewTextBoxColumn.ReadOnly = true;
+            this.ıDeviceLocationDataGridViewTextBoxColumn.Width = 101;
             // 
             // ıDeviceNameDataGridViewTextBoxColumn
             // 
+            this.ıDeviceNameDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.ıDeviceNameDataGridViewTextBoxColumn.DataPropertyName = "IDeviceName";
-            this.ıDeviceNameDataGridViewTextBoxColumn.HeaderText = "IDeviceName";
+            this.ıDeviceNameDataGridViewTextBoxColumn.HeaderText = "Device Name";
             this.ıDeviceNameDataGridViewTextBoxColumn.Name = "ıDeviceNameDataGridViewTextBoxColumn";
             this.ıDeviceNameDataGridViewTextBoxColumn.ReadOnly = true;
+            this.ıDeviceNameDataGridViewTextBoxColumn.Width = 89;
             // 
             // ıIPAddressDataGridViewTextBoxColumn
             // 
+            this.ıIPAddressDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.ıIPAddressDataGridViewTextBoxColumn.DataPropertyName = "IIPAddress";
-            this.ıIPAddressDataGridViewTextBoxColumn.HeaderText = "IIPAddress";
+            this.ıIPAddressDataGridViewTextBoxColumn.HeaderText = "Device IP Address";
             this.ıIPAddressDataGridViewTextBoxColumn.Name = "ıIPAddressDataGridViewTextBoxColumn";
             this.ıIPAddressDataGridViewTextBoxColumn.ReadOnly = true;
+            this.ıIPAddressDataGridViewTextBoxColumn.Width = 110;
             // 
             // ıCommentDataGridViewTextBoxColumn
             // 
+            this.ıCommentDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.ıCommentDataGridViewTextBoxColumn.DataPropertyName = "IComment";
-            this.ıCommentDataGridViewTextBoxColumn.HeaderText = "IComment";
+            this.ıCommentDataGridViewTextBoxColumn.HeaderText = "Comment";
             this.ıCommentDataGridViewTextBoxColumn.Name = "ıCommentDataGridViewTextBoxColumn";
             this.ıCommentDataGridViewTextBoxColumn.ReadOnly = true;
+            this.ıCommentDataGridViewTextBoxColumn.Width = 76;
             // 
             // ıScanIntervalDataGridViewTextBoxColumn
             // 
@@ -147,6 +175,7 @@
             this.ıScanIntervalDataGridViewTextBoxColumn.HeaderText = "IScanInterval";
             this.ıScanIntervalDataGridViewTextBoxColumn.Name = "ıScanIntervalDataGridViewTextBoxColumn";
             this.ıScanIntervalDataGridViewTextBoxColumn.ReadOnly = true;
+            this.ıScanIntervalDataGridViewTextBoxColumn.Visible = false;
             // 
             // ıScanTimerIsActiveDataGridViewCheckBoxColumn
             // 
@@ -154,6 +183,7 @@
             this.ıScanTimerIsActiveDataGridViewCheckBoxColumn.HeaderText = "IScanTimerIsActive";
             this.ıScanTimerIsActiveDataGridViewCheckBoxColumn.Name = "ıScanTimerIsActiveDataGridViewCheckBoxColumn";
             this.ıScanTimerIsActiveDataGridViewCheckBoxColumn.ReadOnly = true;
+            this.ıScanTimerIsActiveDataGridViewCheckBoxColumn.Visible = false;
             // 
             // ıIsActiveDataGridViewCheckBoxColumn
             // 
@@ -161,6 +191,7 @@
             this.ıIsActiveDataGridViewCheckBoxColumn.HeaderText = "IIsActive";
             this.ıIsActiveDataGridViewCheckBoxColumn.Name = "ıIsActiveDataGridViewCheckBoxColumn";
             this.ıIsActiveDataGridViewCheckBoxColumn.ReadOnly = true;
+            this.ıIsActiveDataGridViewCheckBoxColumn.Visible = false;
             // 
             // ıIsDeletedDataGridViewCheckBoxColumn
             // 
@@ -168,6 +199,7 @@
             this.ıIsDeletedDataGridViewCheckBoxColumn.HeaderText = "IIsDeleted";
             this.ıIsDeletedDataGridViewCheckBoxColumn.Name = "ıIsDeletedDataGridViewCheckBoxColumn";
             this.ıIsDeletedDataGridViewCheckBoxColumn.ReadOnly = true;
+            this.ıIsDeletedDataGridViewCheckBoxColumn.Visible = false;
             // 
             // ıRecordDateTimeDataGridViewTextBoxColumn
             // 
@@ -175,13 +207,16 @@
             this.ıRecordDateTimeDataGridViewTextBoxColumn.HeaderText = "IRecordDateTime";
             this.ıRecordDateTimeDataGridViewTextBoxColumn.Name = "ıRecordDateTimeDataGridViewTextBoxColumn";
             this.ıRecordDateTimeDataGridViewTextBoxColumn.ReadOnly = true;
+            this.ıRecordDateTimeDataGridViewTextBoxColumn.Visible = false;
             // 
             // ıSStatusDataGridViewTextBoxColumn
             // 
+            this.ıSStatusDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.ıSStatusDataGridViewTextBoxColumn.DataPropertyName = "ISStatus";
-            this.ıSStatusDataGridViewTextBoxColumn.HeaderText = "ISStatus";
+            this.ıSStatusDataGridViewTextBoxColumn.HeaderText = "Device Status";
             this.ıSStatusDataGridViewTextBoxColumn.Name = "ıSStatusDataGridViewTextBoxColumn";
             this.ıSStatusDataGridViewTextBoxColumn.ReadOnly = true;
+            this.ıSStatusDataGridViewTextBoxColumn.Width = 91;
             // 
             // sSOidNameDataGridViewTextBoxColumn
             // 
@@ -189,6 +224,7 @@
             this.sSOidNameDataGridViewTextBoxColumn.HeaderText = "SSOidName";
             this.sSOidNameDataGridViewTextBoxColumn.Name = "sSOidNameDataGridViewTextBoxColumn";
             this.sSOidNameDataGridViewTextBoxColumn.ReadOnly = true;
+            this.sSOidNameDataGridViewTextBoxColumn.Visible = false;
             // 
             // sSOidDataGridViewTextBoxColumn
             // 
@@ -196,6 +232,7 @@
             this.sSOidDataGridViewTextBoxColumn.HeaderText = "SSOid";
             this.sSOidDataGridViewTextBoxColumn.Name = "sSOidDataGridViewTextBoxColumn";
             this.sSOidDataGridViewTextBoxColumn.ReadOnly = true;
+            this.sSOidDataGridViewTextBoxColumn.Visible = false;
             // 
             // dTTypeDataGridViewTextBoxColumn
             // 
@@ -203,18 +240,21 @@
             this.dTTypeDataGridViewTextBoxColumn.HeaderText = "DTType";
             this.dTTypeDataGridViewTextBoxColumn.Name = "dTTypeDataGridViewTextBoxColumn";
             this.dTTypeDataGridViewTextBoxColumn.ReadOnly = true;
+            this.dTTypeDataGridViewTextBoxColumn.Visible = false;
             // 
             // dMModelDataGridViewTextBoxColumn
             // 
+            this.dMModelDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
             this.dMModelDataGridViewTextBoxColumn.DataPropertyName = "DMModel";
-            this.dMModelDataGridViewTextBoxColumn.HeaderText = "DMModel";
+            this.dMModelDataGridViewTextBoxColumn.HeaderText = "Device Model";
             this.dMModelDataGridViewTextBoxColumn.Name = "dMModelDataGridViewTextBoxColumn";
             this.dMModelDataGridViewTextBoxColumn.ReadOnly = true;
+            this.dMModelDataGridViewTextBoxColumn.Width = 90;
             // 
             // dVVendorDataGridViewTextBoxColumn
             // 
             this.dVVendorDataGridViewTextBoxColumn.DataPropertyName = "DVVendor";
-            this.dVVendorDataGridViewTextBoxColumn.HeaderText = "DVVendor";
+            this.dVVendorDataGridViewTextBoxColumn.HeaderText = "Device Vendor";
             this.dVVendorDataGridViewTextBoxColumn.Name = "dVVendorDataGridViewTextBoxColumn";
             this.dVVendorDataGridViewTextBoxColumn.ReadOnly = true;
             // 
@@ -224,6 +264,7 @@
             this.cRAgreementCompanyNameDataGridViewTextBoxColumn.HeaderText = "CRAgreementCompanyName";
             this.cRAgreementCompanyNameDataGridViewTextBoxColumn.Name = "cRAgreementCompanyNameDataGridViewTextBoxColumn";
             this.cRAgreementCompanyNameDataGridViewTextBoxColumn.ReadOnly = true;
+            this.cRAgreementCompanyNameDataGridViewTextBoxColumn.Visible = false;
             // 
             // cRAgreementStartDataGridViewTextBoxColumn
             // 
@@ -231,6 +272,7 @@
             this.cRAgreementStartDataGridViewTextBoxColumn.HeaderText = "CRAgreementStart";
             this.cRAgreementStartDataGridViewTextBoxColumn.Name = "cRAgreementStartDataGridViewTextBoxColumn";
             this.cRAgreementStartDataGridViewTextBoxColumn.ReadOnly = true;
+            this.cRAgreementStartDataGridViewTextBoxColumn.Visible = false;
             // 
             // cRAgreementStopDataGridViewTextBoxColumn
             // 
@@ -238,6 +280,7 @@
             this.cRAgreementStopDataGridViewTextBoxColumn.HeaderText = "CRAgreementStop";
             this.cRAgreementStopDataGridViewTextBoxColumn.Name = "cRAgreementStopDataGridViewTextBoxColumn";
             this.cRAgreementStopDataGridViewTextBoxColumn.ReadOnly = true;
+            this.cRAgreementStopDataGridViewTextBoxColumn.Visible = false;
             // 
             // cuTypeDataGridViewTextBoxColumn
             // 
@@ -245,6 +288,7 @@
             this.cuTypeDataGridViewTextBoxColumn.HeaderText = "CuType";
             this.cuTypeDataGridViewTextBoxColumn.Name = "cuTypeDataGridViewTextBoxColumn";
             this.cuTypeDataGridViewTextBoxColumn.ReadOnly = true;
+            this.cuTypeDataGridViewTextBoxColumn.Visible = false;
             // 
             // cRAgreementColorPriceDataGridViewTextBoxColumn
             // 
@@ -252,6 +296,7 @@
             this.cRAgreementColorPriceDataGridViewTextBoxColumn.HeaderText = "CRAgreementColorPrice";
             this.cRAgreementColorPriceDataGridViewTextBoxColumn.Name = "cRAgreementColorPriceDataGridViewTextBoxColumn";
             this.cRAgreementColorPriceDataGridViewTextBoxColumn.ReadOnly = true;
+            this.cRAgreementColorPriceDataGridViewTextBoxColumn.Visible = false;
             // 
             // cRAgreementBWPriceDataGridViewTextBoxColumn
             // 
@@ -259,6 +304,7 @@
             this.cRAgreementBWPriceDataGridViewTextBoxColumn.HeaderText = "CRAgreementBWPrice";
             this.cRAgreementBWPriceDataGridViewTextBoxColumn.Name = "cRAgreementBWPriceDataGridViewTextBoxColumn";
             this.cRAgreementBWPriceDataGridViewTextBoxColumn.ReadOnly = true;
+            this.cRAgreementBWPriceDataGridViewTextBoxColumn.Visible = false;
             // 
             // cRCommentDataGridViewTextBoxColumn
             // 
@@ -266,6 +312,7 @@
             this.cRCommentDataGridViewTextBoxColumn.HeaderText = "CRComment";
             this.cRCommentDataGridViewTextBoxColumn.Name = "cRCommentDataGridViewTextBoxColumn";
             this.cRCommentDataGridViewTextBoxColumn.ReadOnly = true;
+            this.cRCommentDataGridViewTextBoxColumn.Visible = false;
             // 
             // cRIsActiveDataGridViewCheckBoxColumn
             // 
@@ -273,6 +320,7 @@
             this.cRIsActiveDataGridViewCheckBoxColumn.HeaderText = "CRIsActive";
             this.cRIsActiveDataGridViewCheckBoxColumn.Name = "cRIsActiveDataGridViewCheckBoxColumn";
             this.cRIsActiveDataGridViewCheckBoxColumn.ReadOnly = true;
+            this.cRIsActiveDataGridViewCheckBoxColumn.Visible = false;
             // 
             // cRIsDeletedDataGridViewCheckBoxColumn
             // 
@@ -280,6 +328,7 @@
             this.cRIsDeletedDataGridViewCheckBoxColumn.HeaderText = "CRIsDeleted";
             this.cRIsDeletedDataGridViewCheckBoxColumn.Name = "cRIsDeletedDataGridViewCheckBoxColumn";
             this.cRIsDeletedDataGridViewCheckBoxColumn.ReadOnly = true;
+            this.cRIsDeletedDataGridViewCheckBoxColumn.Visible = false;
             // 
             // cRRecordDateTimeDataGridViewTextBoxColumn
             // 
@@ -287,6 +336,7 @@
             this.cRRecordDateTimeDataGridViewTextBoxColumn.HeaderText = "CRRecordDateTime";
             this.cRRecordDateTimeDataGridViewTextBoxColumn.Name = "cRRecordDateTimeDataGridViewTextBoxColumn";
             this.cRRecordDateTimeDataGridViewTextBoxColumn.ReadOnly = true;
+            this.cRRecordDateTimeDataGridViewTextBoxColumn.Visible = false;
             // 
             // sPInventorySelectBindingSource
             // 
@@ -321,11 +371,12 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.DataGridView dataGridView1;
         private PrinterCounterCollectorInventoryDataSet printerCounterCollectorInventoryDataSet;
+        private PrinterCounterCollectorInventoryGetDataSet printerCounterCollectorInventoryGetDataSet;
         private System.Windows.Forms.BindingSource sPInventorySelectBindingSource;
         private PrinterCounterCollectorInventoryDataSetTableAdapters.SP_InventorySelectTableAdapter sP_InventorySelectTableAdapter;
+        private PrinterCounterCollectorInventoryGetDataSetTableAdapters.SP_InventoryGetTableAdapter sP_InventoryGetTableAdapter;
+        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataGridViewTextBoxColumn ıInventoryIdDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn ıDeviceLocationDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn ıDeviceNameDataGridViewTextBoxColumn;
